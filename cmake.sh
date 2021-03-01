@@ -1,0 +1,27 @@
+#!/bin/bash
+
+BUILD_TYPE=Release
+BUILD_TESTS=TRUE
+BLAS_LIB=MKL
+INTEL_ROOT=/opt/intel
+MPI_LIB=MPICH  # IMPI is ABI compatible with mpich
+MPI_ROOT=${I_MPI_ROOT} # set by module MPI
+
+INSTALL_DIR=$HOME/Quantum/XACC/installdir/exatn
+
+CXX=g++
+CC=gcc
+FC=gfortran
+
+cmake \
+  -DCMAKE_BUILD_TYPE=${BUILD_TYPE} \
+  -DCMAKE_INSTALL_PREFIX=${INSTALL_DIR} \
+  -DCMAKE_CXX_COMPILER=${CXX} \
+  -DCMAKE_C_COMPILER=${CC} \
+  -DCMAKE_Fortran_COMPILER=${FC} \
+  -DEXATN_BUILD_TESTS=${BUILD_TESTS} \
+  -DBLAS_LIB=${BLAS_LIB} \
+  -DPATH_INTEL_ROOT=${INTEL_ROOT} \
+  -DMPI_LIB=${MPI_LIB} \
+  -DMPI_ROOT_DIR=${MPI_ROOT} \
+  ..
